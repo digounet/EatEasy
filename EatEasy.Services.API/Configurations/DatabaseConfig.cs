@@ -1,5 +1,6 @@
 ﻿using EatEasy.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 
 namespace EatEasy.Services.API.Configurations
 {
@@ -9,8 +10,18 @@ namespace EatEasy.Services.API.Configurations
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
+
+            var conStrBuilder = new NpgsqlConnectionStringBuilder(configuration.GetConnectionString("DefaultConnection"))
+            {
+                Password = configuration["DbPassword"],
+                Username = configuration["DbUser"],
+                Host = configuration["DbServer"],
+                Port = 5432,
+                Database = configuration["DbName"]
+            };
+
             services.AddDbContext<EatEasyContext>(options =>
-                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+                options.UseNpgsql(conStrBuilder.ConnectionString));
         }
     }
 }

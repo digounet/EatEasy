@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EatEasy.Application.ViewModels;
+using FluentValidation.Results;
 
 namespace EatEasy.Application.Interface
 {
     public interface IClientAppService
     {
+        Task<ValidationResult> RegisterAsync(RegisterClientViewModel clientViewModel);
+        Task<ClientViewModel> LoginAsync(LoginViewModel loginViewModel, CancellationToken cancellationToken);
     }
 }

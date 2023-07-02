@@ -7,8 +7,19 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
+
+COPY *.sln .
 COPY ["EatEasy.Services.API/EatEasy.Services.API.csproj", "EatEasy.Services.API/"]
-RUN dotnet restore "EatEasy.Services.API/EatEasy.Services.API.csproj"
+COPY ["EatEasy.Application/EatEasy.Application.csproj", "EatEasy.Application/"]
+COPY ["EatEasy.Domain/EatEasy.Domain.csproj", "EatEasy.Domain/"]
+COPY ["EatEasy.Domain.Core/EatEasy.Domain.Core.csproj", "EatEasy.Domain.Core/"]
+COPY ["EatEasy.CrossCutting.IoC/EatEasy.CrossCutting.IoC.csproj", "EatEasy.CrossCutting.IoC/"]
+COPY ["EatEasy.CrossCutting.Bus/EatEasy.CrossCutting.Bus.csproj", "EatEasy.CrossCutting.Bus/"]
+COPY ["EatEasy.Infra.Data/EatEasy.Infra.Data.csproj", "EatEasy.Infra.Data/"]
+COPY ["EatEasy.Tests.Domain/EatEasy.Tests.Domain.csproj", "EatEasy.Tests.Domain/"]
+
+RUN dotnet restore
+
 COPY . .
 WORKDIR "/src/EatEasy.Services.API"
 RUN dotnet build "EatEasy.Services.API.csproj" -c Release -o /app/build

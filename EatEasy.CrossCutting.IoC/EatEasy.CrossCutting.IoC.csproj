@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EatEasy.Application\EatEasy.Application.csproj" />
     <ProjectReference Include="..\EatEasy.CrossCutting.Bus\EatEasy.CrossCutting.Bus.csproj" />
     <ProjectReference Include="..\EatEasy.Domain\EatEasy.Domain.csproj" />
     <ProjectReference Include="..\EatEasy.Infra.Data\EatEasy.Infra.Data.csproj" />

@@ -1,4 +1,6 @@
-﻿using EatEasy.CrossCutting.Bus;
+﻿using EatEasy.Application.Interface;
+using EatEasy.Application.Services;
+using EatEasy.CrossCutting.Bus;
 using EatEasy.Domain.Commands.CategoryCommands;
 using EatEasy.Domain.Commands.ClientCommands;
 using EatEasy.Domain.Commands.ProductCommands;
@@ -19,6 +21,9 @@ namespace EatEasy.CrossCutting.IoC
         {
             // Domain Bus (Mediator)
             services.AddScoped<IMediatorHandler, InMemoryBus>();
+
+            // Application
+            services.AddScoped<IClientAppService, ClientAppService>();
 
             // Domain - Events
             services.AddScoped<INotificationHandler<OrderRegisteredEvent>, OrderEventHandler>();
