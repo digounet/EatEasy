@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+    <PackageReference Include="MediatR" Version="12.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EatEasy.CrossCutting.Bus\EatEasy.CrossCutting.Bus.csproj" />
+    <ProjectReference Include="..\EatEasy.Domain\EatEasy.Domain.csproj" />
+    <ProjectReference Include="..\EatEasy.Infra.Data\EatEasy.Infra.Data.csproj" />
+    <ProjectReference Include="..\EatEasy.Tests.Domain\EatEasy.Tests.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
