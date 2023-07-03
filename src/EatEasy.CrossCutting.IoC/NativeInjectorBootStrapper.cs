@@ -2,8 +2,8 @@
 using EatEasy.Application.Services;
 using EatEasy.CrossCutting.Bus;
 using EatEasy.Domain.Commands.CategoryCommands;
-using EatEasy.Domain.Commands.ClientCommands;
 using EatEasy.Domain.Commands.ProductCommands;
+using EatEasy.Domain.Commands.UserCommands;
 using EatEasy.Domain.Core.Mediator;
 using EatEasy.Domain.Events;
 using EatEasy.Domain.Interfaces;
@@ -23,8 +23,9 @@ namespace EatEasy.CrossCutting.IoC
             services.AddScoped<IMediatorHandler, InMemoryBus>();
 
             // Application
-            services.AddScoped<IClientAppService, ClientAppService>();
+            services.AddScoped<IUserAppService, UserAppService>();
             services.AddScoped<ICategoryAppService, CategoryAppService>();
+            services.AddScoped<ITokenService, TokenService>();
 
             // Domain - Events
             services.AddScoped<INotificationHandler<OrderRegisteredEvent>, OrderEventHandler>();
@@ -34,9 +35,8 @@ namespace EatEasy.CrossCutting.IoC
             services.AddScoped<IRequestHandler<UpdateCategoryCommand, ValidationResult>, CategoryCommandHandler>();
             services.AddScoped<IRequestHandler<RemoveCategoryCommand, ValidationResult>, CategoryCommandHandler>();
 
-            services.AddScoped<IRequestHandler<RegisterClientCommand, ValidationResult>, ClientCommandHandler>();
-            services.AddScoped<IRequestHandler<UpdateClientCommand, ValidationResult>, ClientCommandHandler>();
-            services.AddScoped<IRequestHandler<RemoveClientCommand, ValidationResult>, ClientCommandHandler>();
+            services.AddScoped<IRequestHandler<RegisterUserCommand, ValidationResult>, UserCommandHandler>();
+            services.AddScoped<IRequestHandler<LoginUserCommand, ValidationResult>, UserCommandHandler>();
 
             services.AddScoped<IRequestHandler<RegisterProductCommand, ValidationResult>, ProductCommandHandler>();
             services.AddScoped<IRequestHandler<UpdateProductCommand, ValidationResult>, ProductCommandHandler>();
@@ -44,10 +44,10 @@ namespace EatEasy.CrossCutting.IoC
 
             // Infra - Data
             services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<IOrderItemRepository, OrderItemRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<EatEasyContext>();
         }
     }

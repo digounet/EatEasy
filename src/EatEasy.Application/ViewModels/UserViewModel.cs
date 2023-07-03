@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EatEasy.Application.ViewModels
 {
-    public class ClientViewModel
+    public class UserViewModel
     {
         [Key]
         public Guid Id { get; set; }

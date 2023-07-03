@@ -1,7 +1,11 @@
 using EatEasy.Infra.Data.Context;
 using EatEasy.Services.API.Configurations;
 using System.Reflection;
+using EatEasy.Domain.Models;
+using EatEasy.Infra.Data.Seed;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +26,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDatabaseConfiguration(builder.Configuration);
 
 // ASP.NET Identity Settings & JWT
-//builder.Services.AddApiIdentityConfiguration(builder.Configuration);
+builder.Services.AddJwtConfiguration(builder.Configuration);
+builder.Services.AddAuthenticationConfiguration();
 
 // AutoMapper Settings
 builder.Services.AddAutoMapperConfiguration();
@@ -31,7 +36,7 @@ builder.Services.AddAutoMapperConfiguration();
 builder.Services.AddSwaggerConfiguration();
 
 // Adding MediatR for Domain Events and Notifications
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+builder.Services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<Program>());
 
 // .NET Native DI Abstraction
 builder.Services.AddDependencyInjectionConfiguration();
@@ -64,6 +69,7 @@ app.UseCors(c =>
     c.AllowAnyOrigin();
 });
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
@@ -71,7 +77,20 @@ app.MapControllers();
 using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
 {
     var context = serviceScope.ServiceProvider.GetService<EatEasyContext>();
-    context.Database.Migrate();
+
+    if (context != null)
+    {
+        context.Database.Migrate();
+        context.SeedCategoriesData();
+    }
+
+    var userManager = serviceScope.ServiceProvider.GetService<UserManager<User>>();
+    var roleManager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
+
+    if (userManager != null && roleManager != null)
+    {
+        await SeedIdentity.SeedIdentityData(userManager, roleManager);
+    }
 }
 
 app.Run();

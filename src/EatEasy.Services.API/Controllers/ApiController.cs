@@ -9,7 +9,7 @@ namespace EatEasy.Services.API.Controllers
     {
         private readonly ICollection<string> _errors = new List<string>();
 
-        protected ActionResult CustomResponse(object result = null)
+        protected ActionResult CustomResponse(object? result = null)
         {
             if (IsOperationValid())
             {

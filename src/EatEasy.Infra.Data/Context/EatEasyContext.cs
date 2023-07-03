@@ -5,16 +5,17 @@ using EatEasy.Domain.Core.Messaging;
 using EatEasy.Domain.Models;
 using EatEasy.Infra.Data.Mapping;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace EatEasy.Infra.Data.Context
 {
-    public sealed class EatEasyContext : DbContext, IUnitOfWork
+    public sealed class EatEasyContext : IdentityDbContext<User>, IUnitOfWork
     {
         private readonly IMediatorHandler _mediatorHandler;
 
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Client> Clients { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
@@ -36,7 +37,7 @@ namespace EatEasy.Infra.Data.Context
                 property.SetColumnType("varchar(100)");
 
             modelBuilder.ApplyConfiguration(new CategoryMap());
-            modelBuilder.ApplyConfiguration(new ClientMap());
+            modelBuilder.ApplyConfiguration(new UserMap());
             modelBuilder.ApplyConfiguration(new ProductMap());
             modelBuilder.ApplyConfiguration(new OrderMap());
             modelBuilder.ApplyConfiguration(new OrderItemMap());

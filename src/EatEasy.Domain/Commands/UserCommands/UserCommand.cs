@@ -1,8 +1,8 @@
 ﻿using EatEasy.Domain.Core.Messaging;
 
-namespace EatEasy.Domain.Commands.ClientCommands
+namespace EatEasy.Domain.Commands.UserCommands
 {
-    public abstract class ClientCommand : Command
+    public abstract class UserCommand : Command
     {
         public Guid Id { get; protected set; }
         public string Name { get; protected set; }
@@ -10,5 +10,6 @@ namespace EatEasy.Domain.Commands.ClientCommands
         public string Password { get; protected set; }
         public string Email { get; protected set; }
         public string MobilePhone { get; protected set; }
+        public string Role { get; protected set; }
     }
 }

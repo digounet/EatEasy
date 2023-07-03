@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using EatEasy.Application.ViewModels;
 using EatEasy.Domain.Commands.CategoryCommands;
-using EatEasy.Domain.Commands.ClientCommands;
 using EatEasy.Domain.Commands.ProductCommands;
+using EatEasy.Domain.Commands.UserCommands;
 
 namespace EatEasy.Application.AutoMapper
 {
@@ -10,10 +10,10 @@ namespace EatEasy.Application.AutoMapper
     {
         public ViewModelToDomainMappingProfile()
         {
-            CreateMap<RegisterClientViewModel, RegisterClientCommand>()
-                .ConstructUsing(c => new RegisterClientCommand(c.Name, c.Cpf, c.Password, c.Email, c.MobilePhone));
-            CreateMap<RegisterClientViewModel, UpdateClientCommand>()
-                .ConstructUsing(c => new UpdateClientCommand(c.Id,  c.Name, c.Cpf, c.Password, c.Email, c.MobilePhone));
+            CreateMap<RegisterUserViewModel, RegisterUserCommand>()
+                .ConstructUsing(c => new RegisterUserCommand( c.Role, c.Name, c.Cpf, c.Password, c.Email, c.MobilePhone));
+            CreateMap<LoginViewModel, LoginUserCommand>()
+                .ConstructUsing(c => new LoginUserCommand(c.Cpf, c.Password));
 
             CreateMap<CategoryViewModel, RegisterCategoryCommand>()
                 .ConstructUsing(c => new RegisterCategoryCommand(c.Name));

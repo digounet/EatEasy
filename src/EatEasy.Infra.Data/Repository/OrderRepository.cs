@@ -14,7 +14,7 @@ namespace EatEasy.Infra.Data.Repository
 
         public async Task<IEnumerable<Order>> GetByClientAsync(Guid clientId, CancellationToken cancellationToken)
         {
-            return await DbSet.Where(c => c.ClientId == clientId)
+            return await DbSet.Where(c => c.ClientId == clientId.ToString())
                 .ToListAsync(cancellationToken);
         }
 

@@ -8,7 +8,7 @@ namespace EatEasy.Application.AutoMapper
     {
         public DomainToViewModelMappingProfile()
         {
-            CreateMap<Client, ClientViewModel>();
+            CreateMap<User, UserViewModel>();
             CreateMap<Category, CategoryViewModel>();
             CreateMap<Product, ProductViewModel>();
         }

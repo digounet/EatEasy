@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EatEasy.Application.ViewModels
 {
-    public class RegisterClientViewModel
+    public class RegisterUserViewModel
     {
         [Key]
         public Guid Id { get; set; }
@@ -22,6 +22,9 @@ namespace EatEasy.Application.ViewModels
 
         [DisplayName("Senha")]
         public string Password { get; set; }
+
+        [DisplayName("Perfil")]
+        public string Role { get; set; }
 
     }
 }

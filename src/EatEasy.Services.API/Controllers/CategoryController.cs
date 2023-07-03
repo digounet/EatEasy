@@ -1,10 +1,13 @@
 ﻿using EatEasy.Application.Interface;
 using EatEasy.Application.ViewModels;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace EatEasy.Services.API.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class CategoryController : ApiController
     {
         private readonly ICategoryAppService _categoryAppService;
