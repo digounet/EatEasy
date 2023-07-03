@@ -1,0 +1,38 @@
+﻿version: '3.4'
+
+services:
+  eateasy:
+    image: eateasy:latest
+    depends_on:
+      - "database"
+    container_name: eateasy-services
+    ports:
+      - "8000:80"
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      - DbUser=${DbUser}
+      - DbPassword=${DbPassword}
+      - DbServer=${DbServer}
+      - DbName=${DbName}
+      - DbPort=5432
+    networks:
+      - dev
+  
+  database:
+    image: postgres:latest
+    container_name: eateasy-db
+    environment:
+      - POSTGRES_USER=${DbUser}
+      - POSTGRES_PASSWORD=${DbPassword}
+      - POSTGRES_DB=${DbName}
+    ports:
+      - "5432:5432"
+    restart: always
+    networks:
+      - dev
+
+networks:
+  dev:
+    driver: bridge
