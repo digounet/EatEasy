@@ -2,23 +2,24 @@
 
 services:
   eateasy:
-    image: eateasy:latest
+    image: digounet/eateasyservicesapi:latest
     depends_on:
       - "database"
-    container_name: eateasy-services
+    container_name: eateasy-api
     ports:
       - "8000:80"
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ./src/EatEasy.Services.API/Dockerfile
     environment:
       - DbUser=${DbUser}
       - DbPassword=${DbPassword}
       - DbServer=${DbServer}
       - DbName=${DbName}
       - DbPort=5432
+
     networks:
-      - dev
+      - eateasy-dev
   
   database:
     image: postgres:latest
@@ -31,8 +32,8 @@ services:
       - "5432:5432"
     restart: always
     networks:
-      - dev
+      - eateasy-dev
 
 networks:
-  dev:
+  eateasy-dev:
     driver: bridge

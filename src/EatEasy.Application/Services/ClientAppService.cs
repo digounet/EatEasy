@@ -31,5 +31,10 @@ namespace EatEasy.Application.Services
         {
             return _mapper.Map<ClientViewModel>(await _clientRepository.LoginAsync(loginViewModel.Cpf, loginViewModel.Password, cancellationToken));
         }
+
+        public void Dispose()
+        {
+            _clientRepository.Dispose();
+        }
     }
 }

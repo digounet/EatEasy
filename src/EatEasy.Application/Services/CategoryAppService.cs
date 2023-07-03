@@ -23,7 +23,7 @@ namespace EatEasy.Application.Services
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _categoryRepository.Dispose();
         }
 
         public async Task<IEnumerable<CategoryViewModel>> GetAllAsync(CancellationToken cancellationToken)

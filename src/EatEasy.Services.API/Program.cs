@@ -1,5 +1,7 @@
+using EatEasy.Infra.Data.Context;
 using EatEasy.Services.API.Configurations;
 using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,7 +53,7 @@ app.UseReDoc(c =>
     c.SpecUrl = "/swagger/v1/swagger.json";
 });
 
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
 app.UseRouting();
 
@@ -66,5 +68,10 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+{
+    var context = serviceScope.ServiceProvider.GetService<EatEasyContext>();
+    context.Database.Migrate();
+}
 
 app.Run();
