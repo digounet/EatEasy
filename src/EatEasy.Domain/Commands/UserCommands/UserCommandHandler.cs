@@ -12,11 +12,15 @@ namespace EatEasy.Domain.Commands.UserCommands
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public UserCommandHandler(UserManager<User> userManager, SignInManager<User> signInManager)
+        public UserCommandHandler(UserManager<User> userManager, 
+            SignInManager<User> signInManager,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
         }
 
         public async Task<ValidationResult> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
@@ -26,6 +30,19 @@ namespace EatEasy.Domain.Commands.UserCommands
             if (await _userManager.FindByNameAsync(request.CPF) != null)
             {
                 AddError("Já existe um usuário com o CPF informado.");
+                return ValidationResult;
+            }
+
+            if (await _userManager.FindByEmailAsync(request.Email) != null)
+            {
+                AddError("Já existe um usuário com o e-mail informado.");
+                return ValidationResult;
+            }
+
+            var role = await _roleManager.FindByNameAsync(request.Role);
+            if (role == null)
+            {
+                AddError("O perfil informado não existe");
                 return ValidationResult;
             }
 
@@ -58,6 +75,7 @@ namespace EatEasy.Domain.Commands.UserCommands
         public void Dispose()
         {
             _userManager.Dispose();
+            _roleManager.Dispose();
         }
 
         public async Task<ValidationResult> Handle(LoginUserCommand request, CancellationToken cancellationToken)

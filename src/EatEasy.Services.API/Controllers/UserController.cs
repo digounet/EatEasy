@@ -46,5 +46,16 @@ namespace EatEasy.Services.API.Controllers
                 return CustomResponse();
             }
         }
+
+        [SwaggerOperation(
+            Summary = "Perfis de usuários",
+            Description = "Listagem de perfis de usuários",
+            OperationId = "GET",
+            Tags = new[] { "Usuário", "Perfil" })]
+        [HttpGet("user-management/roles")]
+        public IActionResult Roles(CancellationToken cancellationToken)
+        {
+            return !ModelState.IsValid ? CustomResponse(ModelState) : CustomResponse(_clientAppService.GetRoles(cancellationToken));
+        }
     }
 }

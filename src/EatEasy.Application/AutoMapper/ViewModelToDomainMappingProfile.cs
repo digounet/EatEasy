@@ -11,7 +11,7 @@ namespace EatEasy.Application.AutoMapper
         public ViewModelToDomainMappingProfile()
         {
             CreateMap<RegisterUserViewModel, RegisterUserCommand>()
-                .ConstructUsing(c => new RegisterUserCommand( c.Role, c.Name, c.Cpf, c.Password, c.Email, c.MobilePhone));
+                .ConstructUsing(c => new RegisterUserCommand( c.RoleName, c.Name, c.Cpf, c.Password, c.Email, c.MobilePhone));
             CreateMap<LoginViewModel, LoginUserCommand>()
                 .ConstructUsing(c => new LoginUserCommand(c.Cpf, c.Password));
 
@@ -21,9 +21,9 @@ namespace EatEasy.Application.AutoMapper
                 .ConstructUsing(c => new UpdateCategoryCommand(c.Id, c.Name));
 
             CreateMap<ProductRegisterViewModel, RegisterProductCommand>()
-                .ConstructUsing(c => new RegisterProductCommand(c.Name, c.Description, c.Category, c.Price));
-            CreateMap<ProductRegisterViewModel, UpdateProductCommand>()
-                .ConstructUsing(c => new UpdateProductCommand(c.Id,  c.Name,c.Description, c.Category, c.Price));
+                .ConstructUsing(c => new RegisterProductCommand(c.Name, c.Description, c.CategoryId, c.Price));
+            CreateMap<ProductUpdateViewModel, UpdateProductCommand>()
+                .ConstructUsing(c => new UpdateProductCommand(c.Id,  c.Name,c.Description, c.CategoryId, c.Price));
         }
     }
 }

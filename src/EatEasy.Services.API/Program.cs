@@ -82,6 +82,7 @@ using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>(
     {
         context.Database.Migrate();
         context.SeedCategoriesData();
+        context.SeedProductsData();
     }
 
     var userManager = serviceScope.ServiceProvider.GetService<UserManager<User>>();

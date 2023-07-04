@@ -24,7 +24,7 @@ namespace EatEasy.Application.ViewModels
         public string Password { get; set; }
 
         [DisplayName("Perfil")]
-        public string Role { get; set; }
+        public string RoleName { get; set; }
 
     }
 }

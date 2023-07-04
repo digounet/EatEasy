@@ -13,10 +13,12 @@ namespace EatEasy.Domain.Commands.ProductCommands
     {
 
         private readonly IProductRepository _productRepository;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public ProductCommandHandler(IProductRepository productRepository)
+        public ProductCommandHandler(IProductRepository productRepository, ICategoryRepository categoryRepository)
         {
             _productRepository = productRepository;
+            _categoryRepository = categoryRepository;
         }
 
         public async Task<ValidationResult> Handle(RegisterProductCommand request, CancellationToken cancellationToken)
@@ -26,8 +28,14 @@ namespace EatEasy.Domain.Commands.ProductCommands
             if (await _productRepository.GetByNameAsync(request.Name, cancellationToken) != null)
             {
                 AddError("Já existe um produto com o nome informado.");
-                return ValidationResult;
             }
+
+            if (await _categoryRepository.GetByIdAsync(request.CategoryID, cancellationToken) == null)
+            {
+                AddError("A categoria informada não existe.");
+            }
+
+            if (!ValidationResult.IsValid) return ValidationResult;
 
             var entity = new Product(Guid.NewGuid(), request.Name, request.Description, request.CategoryID, request.Price);
 
@@ -46,8 +54,14 @@ namespace EatEasy.Domain.Commands.ProductCommands
             if (existingEntity != null && existingEntity.Id != entity.Id)
             {
                 AddError("Já existe um produto com o nome informado.");
-                return ValidationResult;
             }
+
+            if (await _categoryRepository.GetByIdAsync(request.CategoryID, cancellationToken) == null)
+            {
+                AddError("A categoria informada não existe.");
+            }
+
+            if (!ValidationResult.IsValid) return ValidationResult;
 
             _productRepository.Update(entity);
 

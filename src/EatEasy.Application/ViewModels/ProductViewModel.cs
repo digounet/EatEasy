@@ -1,9 +1,14 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace EatEasy.Application.ViewModels
 {
     public class ProductViewModel
     {
+        [Key]
+        [DisplayName("Código")]
+        public Guid Id { get; set; }
+
         [DisplayName("Nome")]
         public string Name { get; set; }
 

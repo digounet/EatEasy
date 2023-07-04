@@ -15,6 +15,7 @@ namespace EatEasy.Services.API.Configurations
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<EatEasyContext>()
+                .AddRoles<IdentityRole>()
                 .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>

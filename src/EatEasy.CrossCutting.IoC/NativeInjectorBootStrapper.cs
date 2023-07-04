@@ -25,6 +25,7 @@ namespace EatEasy.CrossCutting.IoC
             // Application
             services.AddScoped<IUserAppService, UserAppService>();
             services.AddScoped<ICategoryAppService, CategoryAppService>();
+            services.AddScoped<IProductAppService, ProductAppService>();
             services.AddScoped<ITokenService, TokenService>();
 
             // Domain - Events
@@ -47,7 +48,6 @@ namespace EatEasy.CrossCutting.IoC
             services.AddScoped<IOrderItemRepository, OrderItemRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<EatEasyContext>();
         }
     }

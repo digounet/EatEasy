@@ -13,7 +13,7 @@ namespace EatEasy.Infra.Data.Repository
 
         public async Task<Product> GetByNameAsync(string name, CancellationToken cancellationToken)
         {
-            return await DbSet.Where(c => c.Name.ToLowerInvariant().Equals(name.ToLowerInvariant()))
+            return await DbSet.Where(c => c.Name.ToLower().Equals(name.ToLower()))
                 .FirstOrDefaultAsync(cancellationToken);
         }
 
@@ -21,6 +21,11 @@ namespace EatEasy.Infra.Data.Repository
         {
             return await DbSet.Where(c => c.CategoryID == categoryId)
                 .ToListAsync(cancellationToken);
+        }
+
+        public async Task<IEnumerable<Product>> GetAllAsync(CancellationToken cancellationToken)
+        {
+            return await DbSet.Include(p => p.Category).OrderBy(p => p.Name).ToListAsync(cancellationToken);
         }
     }
 }

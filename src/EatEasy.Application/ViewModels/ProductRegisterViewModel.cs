@@ -5,10 +5,6 @@ namespace EatEasy.Application.ViewModels
 {
     public class ProductRegisterViewModel
     {
-        [Key]
-        [DisplayName("Código")]
-        public Guid Id { get; set; }
-
         [DisplayName("Nome")]
         public string Name { get; set; }
 
@@ -16,7 +12,7 @@ namespace EatEasy.Application.ViewModels
         public string Description { get; set; }
 
         [DisplayName("Código da Categoria")]
-        public Guid Category { get; set; }
+        public Guid CategoryId { get; set; }
 
         [DisplayName("Preço")]
         public double Price { get; set; }

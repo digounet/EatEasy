@@ -13,7 +13,7 @@ namespace EatEasy.Infra.Data.Repository
 
         public async Task<Category> GetByNameAsync(string name, CancellationToken cancellationToken)
         {
-            return await DbSet.Where(c => c.Name.ToLowerInvariant().Equals(name.ToLowerInvariant()))
+            return await DbSet.Where(c => c.Name.ToLower().Equals(name.ToLower()))
                 .FirstOrDefaultAsync(cancellationToken);
         }
     }

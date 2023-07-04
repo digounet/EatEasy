@@ -4,8 +4,9 @@ using EatEasy.Application.ViewModels;
 using EatEasy.Domain.Commands.UserCommands;
 using EatEasy.Domain.Core.Domain;
 using EatEasy.Domain.Core.Mediator;
-using EatEasy.Domain.Interfaces;
+using EatEasy.Domain.Models;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Identity;
 
 namespace EatEasy.Application.Services
 {
@@ -14,14 +15,16 @@ namespace EatEasy.Application.Services
         private readonly IMapper _mapper;
         private readonly IMediatorHandler _mediator;
         private readonly ITokenService _tokenService;
-        private readonly IUserRepository _userRepository;
+        private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public UserAppService(IMapper mapper, IMediatorHandler mediator, ITokenService tokenService, IUserRepository userRepository)
+        public UserAppService(IMapper mapper, IMediatorHandler mediator, ITokenService tokenService, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             _mapper = mapper;
             _mediator = mediator;
             _tokenService = tokenService;
-            _userRepository = userRepository;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public async Task<ValidationResult> RegisterAsync(RegisterUserViewModel clientViewModel, CancellationToken cancellationToken)
@@ -37,9 +40,13 @@ namespace EatEasy.Application.Services
 
             if (!loginResponse.IsValid) throw new DomainException(loginResponse.Errors[0].ErrorMessage);
 
-            var user = _mapper.Map<UserViewModel>(await _userRepository.GetByCpfAsync(loginViewModel.Cpf, cancellationToken));
-            return _tokenService.CreateToken(user);
+            return await _tokenService.CreateToken(loginViewModel.Cpf);
 
+        }
+
+        public IEnumerable<RoleViewModel> GetRoles(CancellationToken cancellationToken)
+        {
+            return _mapper.Map<IEnumerable<RoleViewModel>>(_roleManager.Roles);
         }
     }
 }

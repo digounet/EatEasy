@@ -65,7 +65,7 @@ namespace EatEasy.Services.API.Controllers
             Description = "Excluir categorias",
             OperationId = "DELETE",
             Tags = new[] { "Categoria"})]
-        [HttpDelete("category-management")]
+        [HttpDelete("category-management/{id:guid}")]
         public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
         {
             return CustomResponse(await _categoryAppService.Remove(id, cancellationToken));

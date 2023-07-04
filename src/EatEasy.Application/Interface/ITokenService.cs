@@ -4,5 +4,5 @@ namespace EatEasy.Application.Interface;
 
 public interface ITokenService
 {
-    public TokenViewModel? CreateToken(UserViewModel user);
+    public Task<TokenViewModel?> CreateToken(string cpf);
 }
