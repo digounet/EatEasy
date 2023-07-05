@@ -8,6 +8,9 @@ namespace EatEasy.Services.API.Configurations
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
+            services.AddEndpointsApiExplorer();
+            services.AddSwaggerGen();
+
             services.AddSwaggerGen(s =>
             {
                 s.SwaggerDoc("v1", new OpenApiInfo
@@ -45,7 +48,6 @@ namespace EatEasy.Services.API.Configurations
                 });
 
                 s.EnableAnnotations();
-
             });
         }
 
@@ -57,6 +59,12 @@ namespace EatEasy.Services.API.Configurations
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+            });
+
+            app.UseReDoc(c =>
+            {
+                c.DocumentTitle = "EatEasy API Documentation";
+                c.SpecUrl = "/swagger/v1/swagger.json";
             });
         }
     }

@@ -22,8 +22,7 @@ builder.Services.AddControllers()
     });
 
 // Swagger
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerConfiguration();
 
 // Setting DBContexts
 builder.Services.AddDatabaseConfiguration(builder.Configuration);
@@ -34,9 +33,6 @@ builder.Services.AddAuthenticationConfiguration();
 
 // AutoMapper Settings
 builder.Services.AddAutoMapperConfiguration();
-
-// Swagger Config
-builder.Services.AddSwaggerConfiguration();
 
 // Adding MediatR for Domain Events and Notifications
 builder.Services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<Program>());
@@ -52,14 +48,7 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
-app.UseSwagger();
-app.UseSwaggerUI();
-
-app.UseReDoc(c =>
-{
-    c.DocumentTitle = "EatEasy API Documentation";
-    c.SpecUrl = "/swagger/v1/swagger.json";
-});
+app.UseSwaggerSetup();
 
 app.UseHttpsRedirection();
 
