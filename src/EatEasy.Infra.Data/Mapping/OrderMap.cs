@@ -31,6 +31,12 @@ namespace EatEasy.Infra.Data.Mapping
                 .HasConversion(x => x.ToString(),
                     x => (OrderStatus)Enum.Parse(typeof(OrderStatus), x));
 
+            builder.Property(c => c.PaymentType)
+                .HasColumnName("payment_method")
+                .HasMaxLength(15)
+                .HasConversion(x => x.ToString(),
+                    x => (PaymentType)Enum.Parse(typeof(PaymentType), x));
+
             builder.HasOne(o => o.Client)
                 .WithMany(c => c.Orders)
                 .HasForeignKey(x => x.ClientId)

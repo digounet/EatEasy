@@ -1,11 +1,10 @@
 using EatEasy.Infra.Data.Context;
 using EatEasy.Services.API.Configurations;
-using System.Reflection;
 using EatEasy.Domain.Models;
 using EatEasy.Infra.Data.Seed;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +15,11 @@ builder.Configuration
     .AddEnvironmentVariables();
 
 // WebAPI Config
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(opt =>
+    {
+        opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();

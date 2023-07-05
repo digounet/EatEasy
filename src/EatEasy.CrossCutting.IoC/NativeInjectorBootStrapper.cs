@@ -2,6 +2,7 @@
 using EatEasy.Application.Services;
 using EatEasy.CrossCutting.Bus;
 using EatEasy.Domain.Commands.CategoryCommands;
+using EatEasy.Domain.Commands.OrderCommands;
 using EatEasy.Domain.Commands.ProductCommands;
 using EatEasy.Domain.Commands.UserCommands;
 using EatEasy.Domain.Core.Mediator;
@@ -26,6 +27,7 @@ namespace EatEasy.CrossCutting.IoC
             services.AddScoped<IUserAppService, UserAppService>();
             services.AddScoped<ICategoryAppService, CategoryAppService>();
             services.AddScoped<IProductAppService, ProductAppService>();
+            services.AddScoped<IOrderAppService, OrderAppService>();
             services.AddScoped<ITokenService, TokenService>();
 
             // Domain - Events
@@ -42,6 +44,9 @@ namespace EatEasy.CrossCutting.IoC
             services.AddScoped<IRequestHandler<RegisterProductCommand, ValidationResult>, ProductCommandHandler>();
             services.AddScoped<IRequestHandler<UpdateProductCommand, ValidationResult>, ProductCommandHandler>();
             services.AddScoped<IRequestHandler<RemoveProductCommand, ValidationResult>, ProductCommandHandler>();
+            
+            services.AddScoped<IRequestHandler<RegisterOrderCommand, ValidationResult>, OrderCommandHandler>();
+            services.AddScoped<IRequestHandler<UpdateOrderStatusCommand, ValidationResult>, OrderCommandHandler>();
 
             // Infra - Data
             services.AddScoped<ICategoryRepository, CategoryRepository>();

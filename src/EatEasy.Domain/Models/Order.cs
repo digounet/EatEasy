@@ -13,18 +13,20 @@ namespace EatEasy.Domain.Models
         public virtual User Client { get; set; }
 
         public OrderStatus OrderStatus { get; private set; }
+        public PaymentType PaymentType { get; private set; }
 
-        public IEnumerable<OrderItem> Items { get; private set; }
+        public virtual IEnumerable<OrderItem> Items { get; private set; }
 
-        public Order(Guid id, DateTime orderDate, string clientId, double total, IEnumerable<OrderItem> items, int sequence, OrderStatus orderStatus)
+        public Order(Guid id, DateTime orderDate, string clientId, double total, int sequence, OrderStatus orderStatus, PaymentType paymentType, IEnumerable<OrderItem> items)
         {
             Id = id;
             OrderDate = orderDate;
             ClientId = clientId;
             Total = total;
-            Items = items;
             Sequence = sequence;
             OrderStatus = orderStatus;
+            Items = items;
+            PaymentType = paymentType;
         }
 
         //Entity framework requires and empty constructor

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EatEasy.Infra.Data.Migrations
 {
     [DbContext(typeof(EatEasyContext))]
-    [Migration("20230703205250_Initial")]
+    [Migration("20230705140008_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -61,6 +61,12 @@ namespace EatEasy.Infra.Data.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("character varying(15)")
                         .HasColumnName("order_status");
+
+                    b.Property<string>("PaymentType")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("character varying(15)")
+                        .HasColumnName("payment_method");
 
                     b.Property<int>("Sequence")
                         .HasColumnType("integer")

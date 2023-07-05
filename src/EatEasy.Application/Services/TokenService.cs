@@ -49,6 +49,7 @@ public class TokenService : ITokenService
 
         return new TokenViewModel
         {
+            UserId = Guid.Parse(user.Id),
             Cpf = user.CPF,
             Email = user.Email,
             AccessToken = tokenHandler.WriteToken(token),

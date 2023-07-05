@@ -17,6 +17,11 @@ namespace EatEasy.Domain.Core.Messaging
             ValidationResult.Errors.Add(new ValidationFailure(string.Empty, mensagem));
         }
 
+        protected void AddErrors(List<ValidationFailure> validationResultErrors)
+        {
+            validationResultErrors.ForEach(x => AddError(x.ErrorMessage));
+        }
+
         protected async Task<ValidationResult> Commit(IUnitOfWork uow, string message)
         {
             if (!await uow.CommitAsync()) AddError(message);

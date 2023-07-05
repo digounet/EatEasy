@@ -59,6 +59,12 @@ namespace EatEasy.Infra.Data.Migrations
                         .HasColumnType("character varying(15)")
                         .HasColumnName("order_status");
 
+                    b.Property<string>("PaymentType")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("character varying(15)")
+                        .HasColumnName("payment_method");
+
                     b.Property<int>("Sequence")
                         .HasColumnType("integer")
                         .HasColumnName("sequence");

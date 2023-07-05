@@ -12,6 +12,15 @@ namespace EatEasy.Infra.Data.Repository
         {
         }
 
+        public async Task<Order> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+        {
+            return await DbSet
+                .Include(o => o.Items)
+                .ThenInclude(i => i.Product)
+                .ThenInclude(c => c.Category)
+                .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        }
+
         public async Task<IEnumerable<Order>> GetByClientAsync(Guid clientId, CancellationToken cancellationToken)
         {
             return await DbSet
@@ -54,7 +63,8 @@ namespace EatEasy.Infra.Data.Repository
 
         public async Task<int> GetNextSequenceByDateAsync(DateTime date, CancellationToken cancellationToken)
         {
-            return await DbSet.Where(o => o.OrderDate == date).MaxAsync(x => x.Sequence, cancellationToken) + 1;
+            var response = await DbSet.Where(o => o.OrderDate == date).MaxAsync(x => (int?)x.Sequence, cancellationToken) ?? 0;
+            return response + 1;
         }
     }
 }

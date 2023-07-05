@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using EatEasy.Application.ViewModels;
 using EatEasy.Domain.Commands.CategoryCommands;
+using EatEasy.Domain.Commands.OrderCommands;
+using EatEasy.Domain.Commands.OrderItemCommands;
 using EatEasy.Domain.Commands.ProductCommands;
 using EatEasy.Domain.Commands.UserCommands;
+using EatEasy.Domain.Models;
 
 namespace EatEasy.Application.AutoMapper
 {
@@ -23,7 +26,14 @@ namespace EatEasy.Application.AutoMapper
             CreateMap<ProductRegisterViewModel, RegisterProductCommand>()
                 .ConstructUsing(c => new RegisterProductCommand(c.Name, c.Description, c.CategoryId, c.Price));
             CreateMap<ProductUpdateViewModel, UpdateProductCommand>()
-                .ConstructUsing(c => new UpdateProductCommand(c.Id,  c.Name,c.Description, c.CategoryId, c.Price));
+                .ConstructUsing(c => new UpdateProductCommand(c.Id,
+                    c.Name,c.Description, c.CategoryId, c.Price));
+
+            CreateMap<OrderRegisterViewModel, RegisterOrderCommand>()
+                .ForMember(c => c.Items, x => x.MapFrom(d => d.Items))
+                .ForMember(c => c.PaymentType, x => x.MapFrom(d => d.PaymentMethod));
+            CreateMap<OrderItemRegisterViewModel, RegisterOrderItemCommand>()
+                .ConstructUsing(i => new RegisterOrderItemCommand(i.ProductId, i.Qty, i.UnitPrice));
         }
     }
 }

@@ -180,7 +180,8 @@ namespace EatEasy.Infra.Data.Migrations
                     ClientId = table.Column<string>(type: "varchar(100)", nullable: false),
                     total = table.Column<double>(type: "double precision", nullable: false),
                     sequence = table.Column<int>(type: "integer", nullable: false),
-                    order_status = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false)
+                    order_status = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false),
+                    payment_method = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false)
                 },
                 constraints: table =>
                 {

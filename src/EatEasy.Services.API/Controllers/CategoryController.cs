@@ -1,5 +1,6 @@
 ﻿using EatEasy.Application.Interface;
 using EatEasy.Application.ViewModels;
+using EatEasy.Domain.Enums;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +22,7 @@ namespace EatEasy.Services.API.Controllers
             Description = "Lista todas as categorias",
             OperationId = "GET",
             Tags = new[] { "Categoria" })]
+        [AllowAnonymous]
         [HttpGet("category-management")]
         public async Task<IEnumerable<CategoryViewModel>> Get(CancellationToken cancellationToken)
         {
@@ -32,6 +34,7 @@ namespace EatEasy.Services.API.Controllers
             Description = "Pesquisa categoria por ID",
             OperationId = "GET",
             Tags = new[] { "Categoria" })]
+        [AllowAnonymous]
         [HttpGet("category-management/{id:guid}")]
         public async Task<CategoryViewModel> Get(Guid id, CancellationToken cancellationToken)
         {
@@ -43,6 +46,7 @@ namespace EatEasy.Services.API.Controllers
             Description = "Cadastro de categorias",
             OperationId = "POST",
             Tags = new[] { "Categoria"})]
+        [Authorize(Roles = UserRoles.ADMIN)]
         [HttpPost("category-management")]
         public async Task<IActionResult> Post([FromBody] CategoryViewModel categoryViewModel, CancellationToken cancellationToken)
         {
@@ -54,6 +58,7 @@ namespace EatEasy.Services.API.Controllers
             Description = "Alterar dados de categorias",
             OperationId = "PUT",
             Tags = new[] { "Categoria" })]
+        [Authorize(Roles = UserRoles.ADMIN)]
         [HttpPut("category-management")]
         public async Task<IActionResult> Put([FromBody] CategoryViewModel categoryViewModel, CancellationToken cancellationToken)
         {
@@ -65,6 +70,7 @@ namespace EatEasy.Services.API.Controllers
             Description = "Excluir categorias",
             OperationId = "DELETE",
             Tags = new[] { "Categoria"})]
+        [Authorize(Roles = UserRoles.ADMIN)]
         [HttpDelete("category-management/{id:guid}")]
         public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
         {

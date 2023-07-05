@@ -1,20 +1,16 @@
 ﻿using EatEasy.Domain.Commands.OrderCommands.Validations;
-using EatEasy.Domain.Commands.ProductCommands.Validations;
-using EatEasy.Domain.Enums;
-using EatEasy.Domain.Models;
+using EatEasy.Domain.Commands.OrderItemCommands;
 
 namespace EatEasy.Domain.Commands.OrderCommands
 {
     public class RegisterOrderCommand : OrderCommand
     {
-        public RegisterOrderCommand(DateTime orderDate, Guid clientId, double total, IEnumerable<OrderItem> items, int sequence, OrderStatus orderStatus)
+        public IEnumerable<RegisterOrderItemCommand> Items { get; protected set; }
+
+        public RegisterOrderCommand(Guid clientId, IEnumerable<RegisterOrderItemCommand> items)
         {
-            OrderDate = orderDate;
             ClientId = clientId;
-            Total = total;
             Items = items;
-            Sequence = sequence;
-            OrderStatus = orderStatus;
         }
 
         public override bool IsValid()

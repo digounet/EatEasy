@@ -1,4 +1,6 @@
-﻿namespace EatEasy.Domain.Commands.OrderCommands.Validations;
+﻿using FluentValidation;
+
+namespace EatEasy.Domain.Commands.OrderCommands.Validations;
 
 public class RegisterOrderCommandValidation : OrderValidation<RegisterOrderCommand>
 {
@@ -6,5 +8,12 @@ public class RegisterOrderCommandValidation : OrderValidation<RegisterOrderComma
     {
         ValidateUserID();
         ValidateItems();
+        ValidatePaymentType();
+    }
+
+    private void ValidateItems()
+    {
+        RuleFor(c => c.Items)
+            .NotEmpty().WithMessage("Por favor, informe os ítens do pedido.");
     }
 }
