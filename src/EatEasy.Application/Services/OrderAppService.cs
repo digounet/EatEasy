@@ -40,16 +40,11 @@ namespace EatEasy.Application.Services
             return await _mediator.SendCommandAsync(updateStatusCommand, cancellationToken);
         }
 
-        public async Task<IEnumerable<OrderViewModel>> GetAllAsync(string loggedUserRole, Guid? clientId, CancellationToken cancellationToken)
+        public async Task<IEnumerable<OrderViewModel>> GetAllAsync(string loggedUserRole, Guid loggedUserId, Guid? clientId, CancellationToken cancellationToken)
         {
             if (loggedUserRole == UserRoles.CLIENT)
             {
-                if (clientId == null)
-                {
-                    throw new DomainException("É preciso informar o ID do cliente.");
-                }
-
-                return _mapper.Map<IEnumerable<OrderViewModel>>(await _orderRepository.GetByClientAsync(clientId.Value, cancellationToken));
+                return _mapper.Map<IEnumerable<OrderViewModel>>(await _orderRepository.GetByClientAsync(loggedUserId, cancellationToken));
             }
 
             return _mapper.Map<IEnumerable<OrderViewModel>>(await _orderRepository.GetAllAsync(clientId, cancellationToken));

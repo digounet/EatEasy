@@ -7,6 +7,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
+
 COPY ["src/EatEasy.Services.API/EatEasy.Services.API.csproj", "src/EatEasy.Services.API/"]
 COPY ["src/EatEasy.Application/EatEasy.Application.csproj", "src/EatEasy.Application/"]
 COPY ["src/EatEasy.Domain/EatEasy.Domain.csproj", "src/EatEasy.Domain/"]
@@ -17,6 +18,7 @@ COPY ["src/EatEasy.Infra.Data/EatEasy.Infra.Data.csproj", "src/EatEasy.Infra.Dat
 COPY ["src/EatEasy.Tests.Domain/EatEasy.Tests.Domain.csproj", "src/EatEasy.Tests.Domain/"]
 RUN dotnet restore "src/EatEasy.Services.API/EatEasy.Services.API.csproj"
 COPY . .
+
 WORKDIR "/src/src/EatEasy.Services.API"
 RUN dotnet build "EatEasy.Services.API.csproj" -c Release -o /app/build
 

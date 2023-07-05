@@ -53,7 +53,7 @@ namespace EatEasy.Services.API.Controllers
             var loggedUserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             var loggedUserRole = await _userAppService.GetRoleByIdAsync(loggedUserId, cancellationToken);
 
-            return await _orderAppService.GetAllAsync(loggedUserRole, clientId, cancellationToken);
+            return await _orderAppService.GetAllAsync(loggedUserRole, loggedUserId, clientId, cancellationToken);
         }
 
         [SwaggerOperation(
