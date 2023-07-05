@@ -16,8 +16,9 @@ namespace EatEasy.Domain.Models
 
         public IEnumerable<OrderItem> Items { get; private set; }
 
-        protected Order(DateTime orderDate, string clientId, double total, IEnumerable<OrderItem> items, int sequence, OrderStatus orderStatus)
+        public Order(Guid id, DateTime orderDate, string clientId, double total, IEnumerable<OrderItem> items, int sequence, OrderStatus orderStatus)
         {
+            Id = id;
             OrderDate = orderDate;
             ClientId = clientId;
             Total = total;

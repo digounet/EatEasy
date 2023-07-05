@@ -10,15 +10,14 @@ namespace EatEasy.Domain.Models
         public virtual Order Order { get; set; }
         public int Qty { get; private set; }
         public double UnitPrice { get; private set; }
-        public double Total { get; private set; }
+        public double Total => UnitPrice * Qty;
 
-        protected OrderItem(Guid id, Guid orderId, Guid productId, int qty, double unitPrice, double total)
+        protected OrderItem(Guid id, Guid orderId, Guid productId, int qty, double unitPrice)
         {
             OrderId = orderId;
             ProductId = productId;
             Qty = qty;
             UnitPrice = unitPrice;
-            Total = total;
             Id = id;
         }
 
