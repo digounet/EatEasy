@@ -1,5 +1,6 @@
 ﻿using EatEasy.Domain.Core.Messaging;
 using EatEasy.Domain.Enums;
+using EatEasy.Domain.Events;
 using EatEasy.Domain.Interfaces;
 using EatEasy.Domain.Models;
 using FluentValidation.Results;
@@ -27,7 +28,9 @@ public class OrderCommandHandler : CommandHandler,
     {
         if (!request.IsValid()) return request.ValidationResult;
 
-        await ValidateRegisterRequest(request, cancellationToken);
+        var user = await _userManager.FindByIdAsync(request.ClientId.ToString());
+
+        await ValidateRegisterRequest(request, user, cancellationToken);
 
         if (!ValidationResult.IsValid) return ValidationResult;
 
@@ -58,12 +61,15 @@ public class OrderCommandHandler : CommandHandler,
 
         _orderRepository.AddAsync(order, cancellationToken);
 
+        order.AddDomainEvent(new OrderRegisteredEvent(order.Id, user.Name, order.Sequence, order.Items));
+
         return await Commit(_orderRepository.UnitOfWork);
+  
     }
 
-    private async Task ValidateRegisterRequest(RegisterOrderCommand request, CancellationToken cancellationToken)
+    private async Task ValidateRegisterRequest(RegisterOrderCommand request, User? user,
+        CancellationToken cancellationToken)
     {
-        var user = await _userManager.FindByIdAsync(request.ClientId.ToString());
         if (user == null)
         {
             AddError($"O cliente {request.ClientId} não possui cadastro.");
@@ -100,7 +106,11 @@ public class OrderCommandHandler : CommandHandler,
 
         var order = new Order(existing.Id, existing.OrderDate, existing.ClientId, existing.Total, existing.Sequence,
             request.OrderStatus, existing.PaymentType, existing.Items);
+
         _orderRepository.Update(order);
+
+        order.AddDomainEvent(new OrderUpdatedEvent(order.Id, order.OrderStatus));
+
         return await Commit(_orderRepository.UnitOfWork);
     }
 }

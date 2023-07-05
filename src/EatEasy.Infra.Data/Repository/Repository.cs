@@ -1,5 +1,6 @@
 ﻿using EatEasy.Domain.Core.Data;
 using EatEasy.Domain.Core.Domain;
+using EatEasy.Domain.Interfaces;
 using EatEasy.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,12 +39,12 @@ namespace EatEasy.Infra.Data.Repository
 
         public async Task<T> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
-            return await DbSet.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+            return await DbSet.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
 
         public async Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken)
         {
-            return await DbSet.ToListAsync(cancellationToken);
+            return await DbSet.AsNoTracking().ToListAsync(cancellationToken);
         }
 
         public void AddAsync(T entity, CancellationToken cancellationToken)
@@ -53,6 +54,7 @@ namespace EatEasy.Infra.Data.Repository
 
         public void Update(T entity)
         {
+            Db.Entry(entity).State = EntityState.Modified;
             DbSet.Update(entity);
         }
 

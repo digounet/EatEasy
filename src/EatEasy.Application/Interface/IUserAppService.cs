@@ -8,5 +8,6 @@ namespace EatEasy.Application.Interface
         Task<ValidationResult> RegisterAsync(RegisterUserViewModel clientViewModel, CancellationToken cancellationToken);
         Task<TokenViewModel?> LoginAsync(LoginViewModel loginViewModel, CancellationToken cancellationToken);
         IEnumerable<RoleViewModel> GetRoles(CancellationToken cancellationToken);
+        Task<string> GetRoleByIdAsync(Guid loggedUserId, CancellationToken cancellationToken);
     }
 }

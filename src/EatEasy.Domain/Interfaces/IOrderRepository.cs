@@ -11,5 +11,7 @@ namespace EatEasy.Domain.Interfaces
         Task<Order> GetBySequenceAsync(int sequence, CancellationToken cancellationToken);
         Task<IEnumerable<Order>> GetByDateAndStatusAsync(DateTime date, OrderStatus orderStaus, CancellationToken cancellationToken);
         Task<int> GetNextSequenceByDateAsync(DateTime date, CancellationToken cancellationToken);
+
+        Task<IEnumerable<Order>> GetAllAsync(Guid? clientId, CancellationToken cancellationToken);
     }
 }

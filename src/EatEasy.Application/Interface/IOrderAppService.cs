@@ -9,4 +9,6 @@ public interface IOrderAppService : IDisposable
     Task<ValidationResult> RegisterAsync(OrderRegisterViewModel orderViewModel, CancellationToken cancellationToken);
 
     Task<ValidationResult> UpdateStatus(Guid orderId, OrderStatus newStatus, CancellationToken cancellationToken);
+    Task<IEnumerable<OrderViewModel>> GetAllAsync(string loggedUserRole, Guid? clientId, CancellationToken cancellationToken);
+    Task<OrderViewModel> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 }

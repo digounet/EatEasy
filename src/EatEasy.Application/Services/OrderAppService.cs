@@ -5,6 +5,7 @@ using AutoMapper;
 using EatEasy.Domain.Core.Mediator;
 using EatEasy.Domain.Interfaces;
 using EatEasy.Domain.Commands.OrderCommands;
+using EatEasy.Domain.Core.Domain;
 using EatEasy.Domain.Enums;
 
 namespace EatEasy.Application.Services
@@ -37,6 +38,27 @@ namespace EatEasy.Application.Services
         {
             var updateStatusCommand = new UpdateOrderStatusCommand(orderId, newStatus);
             return await _mediator.SendCommandAsync(updateStatusCommand, cancellationToken);
+        }
+
+        public async Task<IEnumerable<OrderViewModel>> GetAllAsync(string loggedUserRole, Guid? clientId, CancellationToken cancellationToken)
+        {
+            if (loggedUserRole == UserRoles.CLIENT)
+            {
+                if (clientId == null)
+                {
+                    throw new DomainException("É preciso informar o ID do cliente.");
+                }
+
+                return _mapper.Map<IEnumerable<OrderViewModel>>(await _orderRepository.GetByClientAsync(clientId.Value, cancellationToken));
+            }
+
+            return _mapper.Map<IEnumerable<OrderViewModel>>(await _orderRepository.GetAllAsync(clientId, cancellationToken));
+
+        }
+
+        public async Task<OrderViewModel> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+        {
+            return _mapper.Map<OrderViewModel>(await _orderRepository.GetByIdAsync(id, cancellationToken));
         }
     }
 }

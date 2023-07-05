@@ -48,5 +48,19 @@ namespace EatEasy.Application.Services
         {
             return _mapper.Map<IEnumerable<RoleViewModel>>(_roleManager.Roles);
         }
+
+        public async Task<string> GetRoleByIdAsync(Guid loggedUserId, CancellationToken cancellationToken)
+        {
+            var user = await _userManager.FindByIdAsync(loggedUserId.ToString());
+
+            if (user != null)
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+
+                return roles[0];
+            }
+
+            throw new DomainException("Usuário não encontrado");
+        }
     }
 }

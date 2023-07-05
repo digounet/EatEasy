@@ -16,6 +16,7 @@ namespace EatEasy.Infra.Data.Repository
             return await DbSet
                 .Include(p => p.Category)
                 .Where(c => c.Name.ToLower().Equals(name.ToLower()))
+                .AsNoTracking()
                 .FirstOrDefaultAsync(cancellationToken);
         }
 
@@ -25,6 +26,7 @@ namespace EatEasy.Infra.Data.Repository
                 .Include(p => p.Category)
                 .Where(c => c.CategoryID == categoryId)
                 .OrderBy(p => p.Name)
+                .AsNoTracking()
                 .ToListAsync(cancellationToken);
         }
 
@@ -33,6 +35,7 @@ namespace EatEasy.Infra.Data.Repository
             return await DbSet
                 .Include(p => p.Category)
                 .OrderBy(p => p.Name)
+                .AsNoTracking()
                 .ToListAsync(cancellationToken);
         }
     }
