@@ -13,19 +13,27 @@ namespace EatEasy.Infra.Data.Repository
 
         public async Task<Product> GetByNameAsync(string name, CancellationToken cancellationToken)
         {
-            return await DbSet.Where(c => c.Name.ToLower().Equals(name.ToLower()))
+            return await DbSet
+                .Include(p => p.Category)
+                .Where(c => c.Name.ToLower().Equals(name.ToLower()))
                 .FirstOrDefaultAsync(cancellationToken);
         }
 
         public async Task<IEnumerable<Product>> GetByCategoryAsync(Guid categoryId, CancellationToken cancellationToken)
         {
-            return await DbSet.Where(c => c.CategoryID == categoryId)
+            return await DbSet
+                .Include(p => p.Category)
+                .Where(c => c.CategoryID == categoryId)
+                .OrderBy(p => p.Name)
                 .ToListAsync(cancellationToken);
         }
 
         public async Task<IEnumerable<Product>> GetAllAsync(CancellationToken cancellationToken)
         {
-            return await DbSet.Include(p => p.Category).OrderBy(p => p.Name).ToListAsync(cancellationToken);
+            return await DbSet
+                .Include(p => p.Category)
+                .OrderBy(p => p.Name)
+                .ToListAsync(cancellationToken);
         }
     }
 }

@@ -31,6 +31,11 @@ namespace EatEasy.Application.Services
             return _mapper.Map<IEnumerable<ProductViewModel>>(await _productRepository.GetAllAsync(cancellationToken));
         }
 
+        public async Task<IEnumerable<ProductViewModel>> FindByCategoryAsync(Guid categoryId, CancellationToken cancellationToken)
+        {
+            return _mapper.Map<IEnumerable<ProductViewModel>>(await _productRepository.GetByCategoryAsync(categoryId, cancellationToken));
+        }
+
         public async Task<ProductViewModel> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
             return _mapper.Map<ProductViewModel>(await _productRepository.GetByIdAsync(id, cancellationToken));

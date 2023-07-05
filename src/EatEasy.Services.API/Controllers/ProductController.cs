@@ -30,6 +30,24 @@ namespace EatEasy.Services.API.Controllers
         }
 
         [SwaggerOperation(
+            Summary = "Produtos por categoria",
+            Description = "Lista os produtos por ID da categoria",
+            OperationId = "GET",
+            Tags = new[] { "Produto" })]
+        [AllowAnonymous]
+        [HttpGet("product-management/products")]
+        public async Task<IActionResult> GetByCategory([FromQuery] Guid categoryId, CancellationToken cancellationToken)
+        {
+            if (categoryId == Guid.Empty)
+            {
+                AddError("Informe o ID da categoria");
+                return CustomResponse();
+            }
+
+            return CustomResponse(await _productAppService.FindByCategoryAsync(categoryId, cancellationToken));
+        }
+
+        [SwaggerOperation(
             Summary = "Pesquisa de produtos",
             Description = "Pesquisa produto por ID",
             OperationId = "GET",
