@@ -28,7 +28,8 @@ Para verificar se está rodando corretamente, abra o browser e vá no endereço:
 
 ## Testando
 
-Para facilitar os testes, estou disponibilizando a collection a ser importada no insomnia. Faça o download da collection clicando [aqui.](assets/Insomnia_2023-07-05.yaml)
+Para facilitar os testes, estou disponibilizando a collection a ser importada no insomnia. Faça o download da collection clicando [aqui](assets/Insomnia_2023-07-05.yaml). Oura opção é clicar diretamente neste botão: 
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=EatEasy&uri=https%3A%2F%2Fgithub.com%2Fdigounet%2FEatEasy%2Fblob%2Fmaster%2Fassets%2FInsomnia_2023-07-05.yaml)
 
 Para importar a collection, abra o insomnia e clique na opção import conforme imagem abaixo.
 
