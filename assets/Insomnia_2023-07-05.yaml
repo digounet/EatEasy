@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2023-07-06T00:43:53.343Z
+__export_date: 2023-07-06T01:34:21.492Z
 __export_source: insomnia.desktop.app:v2023.2.2
 resources:
   - _id: req_789ef938ceb4499dba88bfdb306f4c50
@@ -106,7 +106,7 @@ resources:
     _type: request
   - _id: req_788555d914af4dcf9b10a1d247083036
     parentId: fld_b9f5763bf40a47bfb64684a3e434114b
-    modified: 1688603064132
+    modified: 1688606432421
     created: 1688489336704
     url: "{{ _.BASE_URL }}/category-management"
     name: Categories
@@ -234,8 +234,8 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_6f5d99fd41da4c2aa3fe856333597190
-    parentId: fld_3074acdce5414ef9b161bf70c2a3853c
+  - _id: req_e7c96d55d6a04d11a8c5042b7ca04f35
+    parentId: fld_ee52cd4cb02b4148921a74101b0cd1ef
     modified: 1688603109338
     created: 1688493784033
     url: "{{ _.BASE_URL }}/product-management"
@@ -268,7 +268,7 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: fld_3074acdce5414ef9b161bf70c2a3853c
+  - _id: fld_ee52cd4cb02b4148921a74101b0cd1ef
     parentId: wrk_18e4e74079b64b7e96dfb33d73839e60
     modified: 1688493784027
     created: 1688493784027
@@ -278,8 +278,8 @@ resources:
     environmentPropertyOrder: null
     metaSortKey: -1688488929480
     _type: request_group
-  - _id: req_1a6bd934fa084b78b2933568f2c9dcfb
-    parentId: fld_3074acdce5414ef9b161bf70c2a3853c
+  - _id: req_387516cd583a41ba967553222f6f4757
+    parentId: fld_ee52cd4cb02b4148921a74101b0cd1ef
     modified: 1688603113218
     created: 1688493784045
     url: "{{ _.BASE_URL }}/product-management/{% request 'parameter', 'id', 0 %}"
@@ -307,8 +307,8 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_e9b173e130534069ae6250579a033c9f
-    parentId: fld_3074acdce5414ef9b161bf70c2a3853c
+  - _id: req_86528362674c40e68610af18463275dd
+    parentId: fld_ee52cd4cb02b4148921a74101b0cd1ef
     modified: 1688495424102
     created: 1688493784036
     url: "{{ _.BASE_URL }}/product-management"
@@ -332,8 +332,8 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_ac67635791e54130afa8c9d785baf17d
-    parentId: fld_3074acdce5414ef9b161bf70c2a3853c
+  - _id: req_2a845436f8e443e280fefe30c8851e7c
+    parentId: fld_ee52cd4cb02b4148921a74101b0cd1ef
     modified: 1688523130533
     created: 1688522828435
     url: "{{ _.BASE_URL }}/product-management/products"
@@ -361,8 +361,8 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_79b3790135dd4c5f80549b876698f4e1
-    parentId: fld_3074acdce5414ef9b161bf70c2a3853c
+  - _id: req_1b18968dbc4b4fc4b4b08c78d9153d62
+    parentId: fld_ee52cd4cb02b4148921a74101b0cd1ef
     modified: 1688603121429
     created: 1688493784041
     url: "{{ _.BASE_URL }}/product-management"
@@ -393,9 +393,9 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_7fe4943aff994949b17c448c7e87ffb1
-    parentId: fld_870c0ea95ec14d288ef77e8ed8a62018
-    modified: 1688603274542
+  - _id: req_152d825b9a4348ba9a7098d849bb44e9
+    parentId: fld_9b14600d35ee4958baeaf6a973879fcd
+    modified: 1688606675289
     created: 1688557345098
     url: "{{ _.BASE_URL }}/order-management"
     name: Order
@@ -409,19 +409,19 @@ resources:
         	"paymentMethod": "QRCode",
           "items": [
             {
-              "productId": "{% response 'body', 'req_e9b173e130534069ae6250579a033c9f', 'b64::JC5bMF0uaWQ=::46b', 'when-expired', 60 %}",
+              "productId": "{% response 'body', 'req_86528362674c40e68610af18463275dd', 'b64::JC5bMF0uaWQ=::46b', 'when-expired', 60 %}",
               "qty": 2,
-              "unitPrice": "{% response 'body', 'req_e9b173e130534069ae6250579a033c9f', 'b64::JC5bMF0ucHJpY2U=::46b', 'no-history', 60 %}"
+              "unitPrice": "{% response 'body', 'req_86528362674c40e68610af18463275dd', 'b64::JC5bMF0ucHJpY2U=::46b', 'no-history', 60 %}"
             },
             {
-              "productId": "{% response 'body', 'req_e9b173e130534069ae6250579a033c9f', 'b64::JC5bMV0uaWQ=::46b', 'no-history', 60 %}",
+              "productId": "{% response 'body', 'req_86528362674c40e68610af18463275dd', 'b64::JC5bMV0uaWQ=::46b', 'no-history', 60 %}",
               "qty": 3,
-              "unitPrice": "{% response 'body', 'req_e9b173e130534069ae6250579a033c9f', 'b64::JC5bMV0ucHJpY2U=::46b', 'no-history', 60 %}"
+              "unitPrice": "{% response 'body', 'req_86528362674c40e68610af18463275dd', 'b64::JC5bMV0ucHJpY2U=::46b', 'no-history', 60 %}"
             },
         		 {
-              "productId": "{% response 'body', 'req_e9b173e130534069ae6250579a033c9f', 'b64::JC5bMl0uaWQ=::46b', 'no-history', 60 %}",
+              "productId": "{% response 'body', 'req_86528362674c40e68610af18463275dd', 'b64::JC5bMl0uaWQ=::46b', 'no-history', 60 %}",
               "qty": 4,
-              "unitPrice": "{% response 'body', 'req_e9b173e130534069ae6250579a033c9f', 'b64::JC5bMl0ucHJpY2U=::46b', 'no-history', 60 %}"
+              "unitPrice": "{% response 'body', 'req_86528362674c40e68610af18463275dd', 'b64::JC5bMl0ucHJpY2U=::46b', 'no-history', 60 %}"
             }
           ]
         }
@@ -442,7 +442,7 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: fld_870c0ea95ec14d288ef77e8ed8a62018
+  - _id: fld_9b14600d35ee4958baeaf6a973879fcd
     parentId: wrk_18e4e74079b64b7e96dfb33d73839e60
     modified: 1688557339607
     created: 1688557336969
@@ -452,8 +452,8 @@ resources:
     environmentPropertyOrder: null
     metaSortKey: -1688488929430
     _type: request_group
-  - _id: req_dc83e04bf6c14a77b1df8b92461ae3b4
-    parentId: fld_870c0ea95ec14d288ef77e8ed8a62018
+  - _id: req_9d74ef67532c47c89effa03adb23ad65
+    parentId: fld_9b14600d35ee4958baeaf6a973879fcd
     modified: 1688603144677
     created: 1688579535863
     url: "{{ _.BASE_URL }}/order-management"
@@ -481,12 +481,12 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_ef00c19358b84b26b9f0e51d98ca2040
-    parentId: fld_870c0ea95ec14d288ef77e8ed8a62018
-    modified: 1688603304269
+  - _id: req_ee386c62f85649c2ba86522675ed510f
+    parentId: fld_9b14600d35ee4958baeaf6a973879fcd
+    modified: 1688606696236
     created: 1688584680591
     url: "{{ _.BASE_URL }}/order-management/{% response 'body',
-      'req_dc83e04bf6c14a77b1df8b92461ae3b4', 'b64::JC5bMF0uaWQ=::46b',
+      'req_9d74ef67532c47c89effa03adb23ad65', 'b64::JC5bMF0uaWQ=::46b',
       'when-expired', 60 %}"
     name: Order
     description: ""
@@ -512,12 +512,12 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_74f53030b1144675a83f517f5e040356
-    parentId: fld_870c0ea95ec14d288ef77e8ed8a62018
-    modified: 1688603320778
+  - _id: req_5e98f10a1c28452e8be446541e2f3382
+    parentId: fld_9b14600d35ee4958baeaf6a973879fcd
+    modified: 1688606709170
     created: 1688561978944
     url: "{{ _.BASE_URL }}/order-management/{% response 'body',
-      'req_ef00c19358b84b26b9f0e51d98ca2040', 'b64::JC5pZA==::46b',
+      'req_ee386c62f85649c2ba86522675ed510f', 'b64::JC5pZA==::46b',
       'when-expired', 60 %}/prepare"
     name: Prepare order
     description: ""
@@ -538,12 +538,12 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_901063e1a2134834b5646e3df947dff7
-    parentId: fld_870c0ea95ec14d288ef77e8ed8a62018
-    modified: 1688603330108
+  - _id: req_14e25f23dc044d199e04375c04e4497b
+    parentId: fld_9b14600d35ee4958baeaf6a973879fcd
+    modified: 1688606721065
     created: 1688582907504
     url: "{{ _.BASE_URL }}/order-management/{% response 'body',
-      'req_ef00c19358b84b26b9f0e51d98ca2040', 'b64::JC5pZA==::46b',
+      'req_ee386c62f85649c2ba86522675ed510f', 'b64::JC5pZA==::46b',
       'when-expired', 60 %}/complete"
     name: Complete order
     description: ""
@@ -569,12 +569,12 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_409910c1ee4247dc895fa08475583b84
-    parentId: fld_870c0ea95ec14d288ef77e8ed8a62018
-    modified: 1688603340929
+  - _id: req_97252468798647ce8a512fd7b962446a
+    parentId: fld_9b14600d35ee4958baeaf6a973879fcd
+    modified: 1688606734241
     created: 1688585120122
     url: "{{ _.BASE_URL }}/order-management/{% response 'body',
-      'req_ef00c19358b84b26b9f0e51d98ca2040', 'b64::JC5pZA==::46b',
+      'req_ee386c62f85649c2ba86522675ed510f', 'b64::JC5pZA==::46b',
       'when-expired', 60 %}/done"
     name: Finalize order
     description: ""
@@ -613,22 +613,21 @@ resources:
     _type: environment
   - _id: jar_9cfb08802ab548399ba2cced2c10c106
     parentId: wrk_18e4e74079b64b7e96dfb33d73839e60
-    modified: 1688603342302
+    modified: 1688606678958
     created: 1687390610691
     name: Default Jar
     cookies:
       - key: .AspNetCore.Identity.Application
-        value: CfDJ8JKXdAa2HaFIkRzmKXDGTtNrdfIYXSbXAmdk_aAWkV5s00DSS7F30LYqKdOwqdzYcLJJS8IOieosmOsfAbIY5tzO_c1b46DnXTopbMqotHst3oxf3HkHZ17BZRGYkXNbkjOO7Z55G5oXdGVjz6LEnTjTZVm7O385UAg-9jYQISpMrJXOmYMBqAqv1fIzzH-HxWJ0IlsDBazzMiuNB3xXHmqEIxkhT65NWOF-agBSRxRFHy0xhNk1RCIsazP7jdLf88CSeva9YgdQXAAkB54SDJ__DfxKRFB1eQsCX71n6Fjp0eGBglkdIZ3RYf6Uyu4RT6_z_ZOrcD1rxmQJchnOMwa9PrYT9EOy3xkwCJcfc9uD0AF5xTNxBbdStZI9B_fHYWcvX0ldFNjcGpTG8GQCYxSvmaodowFwf-GlW90BiCRXrYMo1vERjBd-D4objQoa9yQ775TG9IKnD0ypKXbVmz51m5h3mLcgMcKevyfsAAHKLI95-raVDkfY0Eu8q7y99zZ7SiLvvE2xwOxnS5dmCXwZ1fj5qN38wn_t6VHuqZnocktdfQXlecPs0KSrNBPcr3m71c_UvGl2KLpMvZqcIWHCAJzBQEK746OfHmU5Jvx55f6fmoptIczXoxA68LbZkr8RCJyBjWq5rMWYrpZ3yMSGk45m3fYDrULnYTJpixL_JoI3pHHd_KDMspB_uz9jc2XRCET2zpWPLBZ8vB3-lo7ciB3woJ3MMVdABHVtRF-BjiYKk5Egag8HdbwfVlkBixuAKWeCmbHWVZC0ZrA3EA1ABXgHxT_cWUQDkZ5XAktfj1Te0Tu7nE-FYjqyAKpFlGvQtelOjQNvpsERqCbu5Y8
+        value: CfDJ8DF21QMhEmZIs7FgeHiIAhdJc7iUR3MVJqTk1afAfKclWi8L64LG_lTwFobRlERMFQcg-_3ZosEpHN_6NmT4x9ViXVfgQuks5okf3LIYvPhZWbRgxIwXRX-zLIdAZsDdGcLvDSF7oo3E4PLtRhRvr34F8bYVPgFMrfEgA_kyYvcqiYEEv_wTU4ayawitMO9AwaG-0RB5SqkASXA2ujcEAgN4pqmhD1jvBMA4Kjl-_FpuDcZlLs2zciT9my1b9MfukwwCNL7JafHOvFNpw4jBlFz4Ias3SbI1Zb2DocKCy5EfNtxvSuO09qPvjNPBbg2MWDvWHoHGvnwnbETB8c04HWUBfy54WLeC_jqlSWa7IBrkCB0sby9gRWtFCxcflUEQ6qJXRgGrpWCrGLP7duUe55YTbom4FPPSSpPwXt2-kTHU2LBwxH7Vl7gLjhS7fOW1aw0pkDoXJyDsQfKcZf477P9Il-d6YMwL125VMGiRjnkHN_qmvO61mn_5Bd16x5Cpr3YH_qyg-oWCh4mLreQ4zjLqP1QV3Rj216jot9ebxMfL7KdG0YK5OsMS98-CE9y9FbYIIg-o8kQlLMqhUfxVyG1VORWm4VoGQ1sb4Ln4IV9-lYDwgXgsRUg19ATHpArmXwb8l3C-74oHJi8_WcAcF1rAU87OBo8WyXGi3dMlTUBORo0PIG7vGOErIaQyHONv4c04-igxWK6koldqfOMaeIwZn_RjNKM0MHyf3F6keGN67KkKHZjLRSW89QnZMkuRJa4JwHNPN-E30tWLNv_KMg8cYrqn03BFyl4A2_3uA3QdZi_5CWHHzOEwp7jFaNDZ3mzOeVYltlGFzBb45SyUP_0
         domain: localhost
         path: /
-        secure: true
         httpOnly: true
         extensions:
           - samesite=lax
         hostOnly: true
         creation: 2023-07-04T16:44:03.014Z
-        lastAccessed: 2023-07-06T00:29:02.302Z
-        id: "1873653008958529"
+        lastAccessed: 2023-07-06T01:24:38.958Z
+        id: "5031720109183706"
       - key: Identity.External
         expires: 1970-01-01T00:00:00.000Z
         domain: localhost
@@ -640,7 +639,7 @@ resources:
         hostOnly: true
         creation: 2023-07-05T02:08:20.147Z
         lastAccessed: 2023-07-05T14:08:51.741Z
-        id: "7213195149837799"
+        id: "2918261321764919"
       - key: Identity.TwoFactorUserId
         expires: 1970-01-01T00:00:00.000Z
         domain: localhost
@@ -652,7 +651,7 @@ resources:
         hostOnly: true
         creation: 2023-07-05T02:08:20.147Z
         lastAccessed: 2023-07-05T14:08:51.741Z
-        id: "6540003047331502"
+        id: "46153256127654063"
       - key: Identity.TwoFactorRememberMe
         expires: 1970-01-01T00:00:00.000Z
         domain: localhost
@@ -664,7 +663,7 @@ resources:
         hostOnly: true
         creation: 2023-07-05T02:08:20.147Z
         lastAccessed: 2023-07-05T14:08:51.741Z
-        id: "8509516446266432"
+        id: "1785118659627969"
     _type: cookie_jar
   - _id: spc_727751e5d469406194effdad0cadb1a9
     parentId: wrk_18e4e74079b64b7e96dfb33d73839e60
@@ -680,13 +679,19 @@ resources:
     created: 1687390610712
     name: Example Test Suite
     _type: unit_test_suite
+  - _id: uts_60242d9d33fc499c913d3dc328cf4e54
+    parentId: wrk_18e4e74079b64b7e96dfb33d73839e60
+    modified: 1687390610712
+    created: 1687390610712
+    name: Example Test Suite
+    _type: unit_test_suite
   - _id: env_3e3c47b7da4045c9a7930747961bea63
     parentId: env_67ce6e21fa224d08849a52f20fe01880
-    modified: 1688603011261
+    modified: 1688606498614
     created: 1688488977698
     name: Dev
     data:
-      BASE_URL: https://localhost:7046
+      BASE_URL: http://localhost:8000
     dataPropertyOrder:
       "&":
         - BASE_URL
