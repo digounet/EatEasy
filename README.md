@@ -28,7 +28,7 @@ Para verificar se está rodando corretamente, abra o browser e vá no endereço:
 
 ## Testando
 
-Para facilitar os testes, estou disponibilizando a collection a ser importada no insomnia. Faça o download da collection clicando [aqui.](assets/eat_easy_collection.json)
+Para facilitar os testes, estou disponibilizando a collection a ser importada no insomnia. Faça o download da collection clicando [aqui.](assets/Insomnia_2023-07-05.yaml)
 
 Para importar a collection, abra o insomnia e clique na opção import conforme imagem abaixo.
 
