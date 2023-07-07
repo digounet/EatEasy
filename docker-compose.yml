@@ -2,15 +2,12 @@
 
 services:
   eateasy:
-    image: digounet/eateasyservicesapi:latest
+    image: digounet/eateasyapi:latest
     depends_on:
       - "database"
     container_name: eateasy-api
     ports:
       - "8000:80"
-    build:
-      context: .
-      dockerfile: ./src/EatEasy.Services.API/Dockerfile
     environment:
       - DbUser=${DbUser}
       - DbPassword=${DbPassword}
