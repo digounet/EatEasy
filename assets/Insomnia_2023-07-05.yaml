@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2023-07-07T12:33:46.614Z
+__export_date: 2023-07-07T13:46:35.315Z
 __export_source: insomnia.desktop.app:v2023.4.0
 resources:
   - _id: req_789ef938ceb4499dba88bfdb306f4c50
@@ -719,11 +719,11 @@ resources:
     _type: unit_test_suite
   - _id: env_3e3c47b7da4045c9a7930747961bea63
     parentId: env_67ce6e21fa224d08849a52f20fe01880
-    modified: 1688733013842
+    modified: 1688737563165
     created: 1688488977698
     name: Dev
     data:
-      BASE_URL: https://localhost:7046
+      BASE_URL: http://localhost:8000
     dataPropertyOrder:
       "&":
         - BASE_URL
