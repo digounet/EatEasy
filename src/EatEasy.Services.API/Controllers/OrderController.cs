@@ -61,7 +61,7 @@ namespace EatEasy.Services.API.Controllers
             Description = "Pesquisa pedido por ID",
             OperationId = "GET",
             Tags = new[] { "Pedido" })]
-        [AllowAnonymous]
+        [Authorize]
         [HttpGet("order-management/{id:guid}")]
         public async Task<OrderViewModel> Get(Guid id, CancellationToken cancellationToken)
         {
@@ -106,6 +106,18 @@ namespace EatEasy.Services.API.Controllers
         {
             return CustomResponse(
                 await _orderAppService.UpdateStatus(orderId, OrderStatus.Done, cancellationToken));
+        }
+
+        [SwaggerOperation(
+            Summary = "Exclusão de pedido",
+            Description = "Exclui pedido por ID. Apenas para usuários admin.",
+            OperationId = "DELETE",
+            Tags = new[] { "Pedido" })]
+        [Authorize(Roles = UserRoles.ADMIN)]
+        [HttpDelete("order-management/{orderId:guid}")]
+        public async Task<IActionResult> Delete(Guid orderId, CancellationToken cancellationToken)
+        {
+            return CustomResponse(await _orderAppService.Remove(orderId, cancellationToken));
         }
     }
 

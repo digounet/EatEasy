@@ -58,15 +58,15 @@ namespace EatEasy.Domain.Commands.CategoryCommands
         {
             if (!request.IsValid()) return request.ValidationResult;
 
-            var customer = await _categoryRepository.GetByIdAsync(request.Id, cancellationToken);
+            var category = await _categoryRepository.GetByIdAsync(request.Id, cancellationToken);
 
-            if (customer is null)
+            if (category is null)
             {
                 AddError("Categoria não encontrada");
                 return ValidationResult;
             }
 
-            _categoryRepository.Remove(customer);
+            _categoryRepository.Remove(category);
 
             return await Commit(_categoryRepository.UnitOfWork);
         }

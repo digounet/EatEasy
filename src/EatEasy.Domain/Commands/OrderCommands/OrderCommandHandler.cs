@@ -11,7 +11,8 @@ namespace EatEasy.Domain.Commands.OrderCommands;
 
 public class OrderCommandHandler : CommandHandler,
     IRequestHandler<RegisterOrderCommand, ValidationResult>,
-    IRequestHandler<UpdateOrderStatusCommand, ValidationResult>
+    IRequestHandler<UpdateOrderStatusCommand, ValidationResult>,
+    IRequestHandler<RemoveOrderCommand, ValidationResult>
 {
     private readonly IOrderRepository _orderRepository;
     private readonly IProductRepository _productRepository;
@@ -110,6 +111,23 @@ public class OrderCommandHandler : CommandHandler,
         _orderRepository.Update(order);
 
         order.AddDomainEvent(new OrderUpdatedEvent(order.Id, order.OrderStatus));
+
+        return await Commit(_orderRepository.UnitOfWork);
+    }
+
+    public async Task<ValidationResult> Handle(RemoveOrderCommand request, CancellationToken cancellationToken)
+    {
+        if (!request.IsValid()) return request.ValidationResult;
+
+        var order = await _orderRepository.GetByIdAsync(request.Id, cancellationToken);
+
+        if (order is null)
+        {
+            AddError("Pedido não encontrado");
+            return ValidationResult;
+        }
+
+        _orderRepository.Remove(order);
 
         return await Commit(_orderRepository.UnitOfWork);
     }

@@ -7,6 +7,7 @@ using EatEasy.Domain.Interfaces;
 using EatEasy.Domain.Commands.OrderCommands;
 using EatEasy.Domain.Core.Domain;
 using EatEasy.Domain.Enums;
+using EatEasy.Domain.Commands.CategoryCommands;
 
 namespace EatEasy.Application.Services
 {
@@ -54,6 +55,12 @@ namespace EatEasy.Application.Services
         public async Task<OrderViewModel> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
             return _mapper.Map<OrderViewModel>(await _orderRepository.GetByIdAsync(id, cancellationToken));
+        }
+
+        public async Task<ValidationResult> Remove(Guid id, CancellationToken cancellationToken)
+        {
+            var removeCommand = new RemoveOrderCommand(id);
+            return await _mediator.SendCommandAsync(removeCommand, cancellationToken);
         }
     }
 }

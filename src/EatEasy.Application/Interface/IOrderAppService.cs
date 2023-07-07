@@ -11,4 +11,6 @@ public interface IOrderAppService : IDisposable
     Task<ValidationResult> UpdateStatus(Guid orderId, OrderStatus newStatus, CancellationToken cancellationToken);
     Task<IEnumerable<OrderViewModel>> GetAllAsync(string loggedUserRole, Guid loggedUserId, Guid? clientId, CancellationToken cancellationToken);
     Task<OrderViewModel> GetByIdAsync(Guid id, CancellationToken cancellationToken);
+
+    Task<ValidationResult> Remove(Guid id, CancellationToken cancellationToken);
 }

@@ -13,6 +13,19 @@ A API contempla os seguintes requisitos:
 - Listagem de pedidos por usuário;
 - Atualização de status dos pedidos para: preparando, completo e finalizado.
 
+## Arquitetura da API
+
+![Arquitetura da API](./assets/camadas%20do%20sofware.jpg)
+
+## Linguagem ubíqua
+
+![Linguagem da API](./assets/linguagem.png)
+
+## Fluxo de compra e checkout
+
+![Linguagem da API](./assets/fluxos.png)
+
+
 ## Como rodar a aplicação?
 
 *Pré requistos:*

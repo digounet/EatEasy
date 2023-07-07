@@ -1,7 +1,7 @@
 _type: export
 __export_format: 4
-__export_date: 2023-07-06T01:34:21.492Z
-__export_source: insomnia.desktop.app:v2023.2.2
+__export_date: 2023-07-07T12:33:46.614Z
+__export_source: insomnia.desktop.app:v2023.4.0
 resources:
   - _id: req_789ef938ceb4499dba88bfdb306f4c50
     parentId: fld_dd1d2ea926a9412eb8bfdc8af8b6dba7
@@ -395,7 +395,7 @@ resources:
     _type: request
   - _id: req_152d825b9a4348ba9a7098d849bb44e9
     parentId: fld_9b14600d35ee4958baeaf6a973879fcd
-    modified: 1688606675289
+    modified: 1688732990700
     created: 1688557345098
     url: "{{ _.BASE_URL }}/order-management"
     name: Order
@@ -405,7 +405,7 @@ resources:
       mimeType: application/json
       text: >-
         {
-          "clientId": "{% response 'body', 'req_789ef938ceb4499dba88bfdb306f4c50', 'b64::JC51c2VySWQ=::46b', 'never', 60 %}",
+          "clientId": "{% response 'body', 'req_789ef938ceb4499dba88bfdb306f4c50', 'b64::JC51c2VySWQ=::46b', 'always', 60 %}",
         	"paymentMethod": "QRCode",
           "items": [
             {
@@ -483,11 +483,11 @@ resources:
     _type: request
   - _id: req_ee386c62f85649c2ba86522675ed510f
     parentId: fld_9b14600d35ee4958baeaf6a973879fcd
-    modified: 1688606696236
+    modified: 1688732574636
     created: 1688584680591
     url: "{{ _.BASE_URL }}/order-management/{% response 'body',
       'req_9d74ef67532c47c89effa03adb23ad65', 'b64::JC5bMF0uaWQ=::46b',
-      'when-expired', 60 %}"
+      'always', 60 %}"
     name: Order
     description: ""
     method: GET
@@ -514,11 +514,11 @@ resources:
     _type: request
   - _id: req_5e98f10a1c28452e8be446541e2f3382
     parentId: fld_9b14600d35ee4958baeaf6a973879fcd
-    modified: 1688606709170
+    modified: 1688732620953
     created: 1688561978944
     url: "{{ _.BASE_URL }}/order-management/{% response 'body',
-      'req_ee386c62f85649c2ba86522675ed510f', 'b64::JC5pZA==::46b',
-      'when-expired', 60 %}/prepare"
+      'req_ee386c62f85649c2ba86522675ed510f', 'b64::JC5pZA==::46b', 'always', 60
+      %}/prepare"
     name: Prepare order
     description: ""
     method: POST
@@ -540,11 +540,11 @@ resources:
     _type: request
   - _id: req_14e25f23dc044d199e04375c04e4497b
     parentId: fld_9b14600d35ee4958baeaf6a973879fcd
-    modified: 1688606721065
+    modified: 1688732627480
     created: 1688582907504
     url: "{{ _.BASE_URL }}/order-management/{% response 'body',
-      'req_ee386c62f85649c2ba86522675ed510f', 'b64::JC5pZA==::46b',
-      'when-expired', 60 %}/complete"
+      'req_ee386c62f85649c2ba86522675ed510f', 'b64::JC5pZA==::46b', 'always', 60
+      %}/complete"
     name: Complete order
     description: ""
     method: POST
@@ -571,11 +571,11 @@ resources:
     _type: request
   - _id: req_97252468798647ce8a512fd7b962446a
     parentId: fld_9b14600d35ee4958baeaf6a973879fcd
-    modified: 1688606734241
+    modified: 1688732634476
     created: 1688585120122
     url: "{{ _.BASE_URL }}/order-management/{% response 'body',
-      'req_ee386c62f85649c2ba86522675ed510f', 'b64::JC5pZA==::46b',
-      'when-expired', 60 %}/done"
+      'req_ee386c62f85649c2ba86522675ed510f', 'b64::JC5pZA==::46b', 'always', 60
+      %}/done"
     name: Finalize order
     description: ""
     method: POST
@@ -600,6 +600,37 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
+  - _id: req_7159aa39a6cc4a749f925cb602270074
+    parentId: fld_9b14600d35ee4958baeaf6a973879fcd
+    modified: 1688732643568
+    created: 1688732444606
+    url: "{{ _.BASE_URL }}/order-management/{% response 'body',
+      'req_ee386c62f85649c2ba86522675ed510f', 'b64::JC5pZA==::46b', 'always', 60
+      %}"
+    name: Order
+    description: ""
+    method: DELETE
+    body: {}
+    parameters:
+      - id: pair_a3d6009dd4b349f394496a4e314dd12a
+        name: orderid
+        value: 8ef658b8-10ce-4748-a659-41bf5dfa5a8f
+        description: ""
+        disabled: true
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_789ef938ceb4499dba88bfdb306f4c50',
+        'b64::JC5hY2Nlc3NUb2tlbg==::46b', 'when-expired', 60 %}"
+    metaSortKey: -1688496274265.5703
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
   - _id: env_67ce6e21fa224d08849a52f20fe01880
     parentId: wrk_18e4e74079b64b7e96dfb33d73839e60
     modified: 1687390610680
@@ -613,21 +644,22 @@ resources:
     _type: environment
   - _id: jar_9cfb08802ab548399ba2cced2c10c106
     parentId: wrk_18e4e74079b64b7e96dfb33d73839e60
-    modified: 1688606678958
+    modified: 1688733151558
     created: 1687390610691
     name: Default Jar
     cookies:
       - key: .AspNetCore.Identity.Application
-        value: CfDJ8DF21QMhEmZIs7FgeHiIAhdJc7iUR3MVJqTk1afAfKclWi8L64LG_lTwFobRlERMFQcg-_3ZosEpHN_6NmT4x9ViXVfgQuks5okf3LIYvPhZWbRgxIwXRX-zLIdAZsDdGcLvDSF7oo3E4PLtRhRvr34F8bYVPgFMrfEgA_kyYvcqiYEEv_wTU4ayawitMO9AwaG-0RB5SqkASXA2ujcEAgN4pqmhD1jvBMA4Kjl-_FpuDcZlLs2zciT9my1b9MfukwwCNL7JafHOvFNpw4jBlFz4Ias3SbI1Zb2DocKCy5EfNtxvSuO09qPvjNPBbg2MWDvWHoHGvnwnbETB8c04HWUBfy54WLeC_jqlSWa7IBrkCB0sby9gRWtFCxcflUEQ6qJXRgGrpWCrGLP7duUe55YTbom4FPPSSpPwXt2-kTHU2LBwxH7Vl7gLjhS7fOW1aw0pkDoXJyDsQfKcZf477P9Il-d6YMwL125VMGiRjnkHN_qmvO61mn_5Bd16x5Cpr3YH_qyg-oWCh4mLreQ4zjLqP1QV3Rj216jot9ebxMfL7KdG0YK5OsMS98-CE9y9FbYIIg-o8kQlLMqhUfxVyG1VORWm4VoGQ1sb4Ln4IV9-lYDwgXgsRUg19ATHpArmXwb8l3C-74oHJi8_WcAcF1rAU87OBo8WyXGi3dMlTUBORo0PIG7vGOErIaQyHONv4c04-igxWK6koldqfOMaeIwZn_RjNKM0MHyf3F6keGN67KkKHZjLRSW89QnZMkuRJa4JwHNPN-E30tWLNv_KMg8cYrqn03BFyl4A2_3uA3QdZi_5CWHHzOEwp7jFaNDZ3mzOeVYltlGFzBb45SyUP_0
+        value: CfDJ8JKXdAa2HaFIkRzmKXDGTtNwx0uNu0HFGc79gOd4Lnqx_8fi3WfXraEAj5Ns7TWRl_zql1316pMHDDjY-vM3M7Romun1uaro-30kkPop9IdjE-X_4M_SKMPkU-51NodKRWCdVUqgMMr70Okw9xobmGAXiqp_sLGXAXgwpE-IdSQR5Bjuv_uNz_2rdryhUXWP8vYcLcpcbAlNER1CeI0wQ78_uIIaUbsqmRUHrm8SVtuk9fBf8DVaqTgcZ_ogC7aLS7KsakxfZau08TOj9EavreR-ELbraswrvgag2SrjliPY5ZnFaBEhmZi3acFNn9ze-rJNobxK3DV-Wrc5aLEBIABWDvVj8I02ucYn2K6gWUofPmT_nDa8HGcEsTqer366ul1tqgOFkgEeuSGn4MghSuPisWY86IQzJgGI8B5aZEPDknTJ-QhVbvtmoPxC1AoCxvSkpy4DJX-8YyUuILb6bkrJCYaRQ9T5i6gG16sq7dprrYNuL8WtU2FO5qWRzccaB-bisY1reE4NfifEa88BhSnocs4QGDhHYflIq-q_mopEV6_BnFDIQg1OsddnYUpKU_pWbvUwXastB-VqjQYgtfYxQXZ4DsjX2o4tvaleJjSY7qo2u14kVxiPT5Ca-3RZ21Xw_DdSSvXNRlpO5L5WuRAxD6xf2u9i5wTV6aDWrZxFiF4rJI5kmqfu8rvsU5sWIVDPmdfykmknnxuwcPKhaseRCAxb96B3X3rIqUh1HFGxsCXRqZq7nXnV371zhw2EFtTwNU5GDVFxZp3BF4v8hcXOxSljuHXglaDurlVxEsur6sGvJfobtpUCj8Xn_L_VreoE2pwipgs9dWt0mQmEHd0
         domain: localhost
         path: /
+        secure: true
         httpOnly: true
         extensions:
           - samesite=lax
         hostOnly: true
         creation: 2023-07-04T16:44:03.014Z
-        lastAccessed: 2023-07-06T01:24:38.958Z
-        id: "5031720109183706"
+        lastAccessed: 2023-07-07T12:32:31.557Z
+        id: "10193048643562519"
       - key: Identity.External
         expires: 1970-01-01T00:00:00.000Z
         domain: localhost
@@ -639,7 +671,7 @@ resources:
         hostOnly: true
         creation: 2023-07-05T02:08:20.147Z
         lastAccessed: 2023-07-05T14:08:51.741Z
-        id: "2918261321764919"
+        id: "008951039350055368"
       - key: Identity.TwoFactorUserId
         expires: 1970-01-01T00:00:00.000Z
         domain: localhost
@@ -651,7 +683,7 @@ resources:
         hostOnly: true
         creation: 2023-07-05T02:08:20.147Z
         lastAccessed: 2023-07-05T14:08:51.741Z
-        id: "46153256127654063"
+        id: "29544285868298026"
       - key: Identity.TwoFactorRememberMe
         expires: 1970-01-01T00:00:00.000Z
         domain: localhost
@@ -663,7 +695,7 @@ resources:
         hostOnly: true
         creation: 2023-07-05T02:08:20.147Z
         lastAccessed: 2023-07-05T14:08:51.741Z
-        id: "1785118659627969"
+        id: "2573094406244949"
     _type: cookie_jar
   - _id: spc_727751e5d469406194effdad0cadb1a9
     parentId: wrk_18e4e74079b64b7e96dfb33d73839e60
@@ -687,11 +719,11 @@ resources:
     _type: unit_test_suite
   - _id: env_3e3c47b7da4045c9a7930747961bea63
     parentId: env_67ce6e21fa224d08849a52f20fe01880
-    modified: 1688606498614
+    modified: 1688733013842
     created: 1688488977698
     name: Dev
     data:
-      BASE_URL: http://localhost:8000
+      BASE_URL: https://localhost:7046
     dataPropertyOrder:
       "&":
         - BASE_URL

@@ -60,6 +60,7 @@ namespace EatEasy.Infra.Data.Repository
 
         public void Remove(T entity)
         {
+            Db.Entry(entity).State = EntityState.Deleted;
             DbSet.Remove(entity);
         }
     }

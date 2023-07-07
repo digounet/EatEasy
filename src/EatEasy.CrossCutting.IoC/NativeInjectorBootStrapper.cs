@@ -47,6 +47,7 @@ namespace EatEasy.CrossCutting.IoC
             
             services.AddScoped<IRequestHandler<RegisterOrderCommand, ValidationResult>, OrderCommandHandler>();
             services.AddScoped<IRequestHandler<UpdateOrderStatusCommand, ValidationResult>, OrderCommandHandler>();
+            services.AddScoped<IRequestHandler<RemoveOrderCommand, ValidationResult>, OrderCommandHandler>();
 
             // Infra - Data
             services.AddScoped<ICategoryRepository, CategoryRepository>();

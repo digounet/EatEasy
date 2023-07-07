@@ -72,15 +72,15 @@ namespace EatEasy.Domain.Commands.ProductCommands
         {
             if (!request.IsValid()) return request.ValidationResult;
 
-            var customer = await _productRepository.GetByIdAsync(request.Id, cancellationToken);
+            var product = await _productRepository.GetByIdAsync(request.Id, cancellationToken);
 
-            if (customer is null)
+            if (product is null)
             {
                 AddError("Produto não encontrado");
                 return ValidationResult;
             }
 
-            _productRepository.Remove(customer);
+            _productRepository.Remove(product);
 
             return await Commit(_productRepository.UnitOfWork);
         }
